@@ -8,7 +8,7 @@ A simple script to display system stats for your Raspberry Pi, including CPU tem
 
 1. Clone or download the script:
 ```sh
-curl -o ~/.metrics.sh https://raw.githubusercontent.com/Bastien2203/pi-stats/metrics.sh
+curl -o ~/.metrics.sh https://raw.githubusercontent.com/Bastien2203/pi-stats/refs/heads/main/.metrics.sh
 ```
 
 1. Make it executable:
