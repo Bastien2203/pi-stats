@@ -7,7 +7,6 @@ CPU_LOAD_ALERT=1.0
 
 function decode_throttle_status() {
     local hex_code="$1"
-
     hex_code=${hex_code#0x}
     local code=$((16#$hex_code))
     local status=""
