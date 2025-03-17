@@ -10,7 +10,6 @@ mem_used=$(awk '/MemTotal/ {total=$2} /MemAvailable/ {printf "%.0f", (total-$2)/
 disk_used=$(df / | awk 'NR==2 {gsub("%", ""); print $5}')
 
 function notify() {
-
     echo "$1"
 }
 
