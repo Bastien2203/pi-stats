@@ -28,11 +28,11 @@ function show_metrics() {
     local cpu_temp_val mem_percent disk_percent cpu_load_1 warnings=""
 
     hostname=$(hostname)
-    uptime=$(uptime -p | sed 's/up //')
-    cpu_temp=$(vcgencmd measure_temp | cut -d= -f2 | awk '{print $1"°C"}')
-    cpu_load=$(awk '{printf "%.1f, %.1f, %.1f", $1, $2, $3}' /proc/loadavg)
-    mem_used=$(free -m | awk '/Mem:/ {printf "%.1f%% of %dMB", $3/$2*100, $2}')
-    disk_used=$(df -h / | awk '/\// {printf "%s (%s free)", $5, $4}')
+    uptime=$(cut -d' ' -f2- /proc/uptime | awk '{print int($1/3600)"h "int(($1%3600)/60)"m"}')
+    cpu_temp=$(vcgencmd measure_temp | cut -d= -f2)
+    cpu_load=$(cut -d' ' -f1-3 /proc/loadavg)
+    mem_used=$(awk '/Mem:/ {printf "%.1f%% of %dMB", $3/$2*100, $2}' < /proc/meminfo)
+    disk_used=$(df -h / | awk 'NR==2 {printf "%s (%s free)", $5, $4}')
 
     throttled_hex=$(vcgencmd get_throttled | cut -d= -f2)
     throttled_status=$(decode_throttle_status "$throttled_hex")
